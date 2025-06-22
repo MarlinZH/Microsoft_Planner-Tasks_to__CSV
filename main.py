@@ -1,11 +1,23 @@
 import pandas as pd
 import json
-import request
 import os
-# Replace with the path to your JSON file
-json_file_path = r'C:\Users\Froap\_DEV\Planner_Tasks_to_Excel\TASKS.json'
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
+
+# Hide the root Tkinter window
+Tk().withdraw()
+
+# Open a file dialog for the user to select the JSON file
+json_file_path = askopenfilename(
+    title="Select your Planner Tasks JSON file",
+    filetypes=[("JSON files", "*.json"), ("All files", "*.*")]
+)
 
 # Load JSON data from the file
+if not json_file_path:
+    print("No file selected. Exiting.")
+    exit()
+    
 with open(json_file_path, 'r') as file:
     json_data = json.load(file)
 
